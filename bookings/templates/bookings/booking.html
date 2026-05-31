@@ -51,7 +51,7 @@
 
                             <div class="col-md-4">
                                 <label class="form-label">Airline</label>
-                               <select name="airline" class="form-select">
+                                <select name="airline" class="form-select">
                                     <option value="">Any airline</option>
 
                                     {% for airline in airlines %}
@@ -70,61 +70,103 @@
 
                             <div class="col-md-4">
                                 <label class="form-label">Departure date</label>
-                                <input type="date" name="departure_date" class="form-control" required>
+                                <input
+                                    type="date"
+                                    name="departure_date"
+                                    class="form-control"
+                                    value="{{ departure_date }}"
+                                    required>
                             </div>
 
                             <div class="col-md-4">
                                 <label class="form-label">Return date</label>
-                                <input type="date" name="return_date" class="form-control">
+                                <input
+                                    type="date"
+                                    name="return_date"
+                                    class="form-control"
+                                    value="{{ return_date }}">
                             </div>
 
                         </div>
 
-                        <button type="submit" class="flight-btn">
-                            Search flights
+                        <button type="submit" class="btn btn-dark">
+                            Search
                         </button>
                     </form>
 
                    {% if offers %}
-                        <div class="mt-4">
-                            {% for offer in offers %}
-                                <div class="card mt-3 p-3 shadow-sm">
-                                    <div class="row align-items-center">
-                                        <div class="col-md-3">
-                                            <h5>{{ offer.from_city }}</h5>
-                                            <p class="text-muted mb-0">Departure</p>
-                                        </div>
+                    <div class="mt-4">
 
-                                        <div class="col-md-3">
-                                            <p class="mb-1">{{ offer.duration }}</p>
-                                            <span>────────></span>
-                                        </div>
+                        {% for offer in offers %}
+                        <div class="card mt-3 p-3 shadow-sm">
 
-                                        <div class="col-md-3">
-                                            <h5>{{ offer.to_destination.name }}</h5>
-                                            <p class="text-muted mb-0">{{ offer.airline.name }}</p>
-                                        </div>
+                            <div class="row align-items-center">
 
-                                        <div class="col-md-3 text-end">
-                                            <h5>${{ offer.price }}</h5>
-                                            {% if offer.baggage_included %}
-                                                <p class="text-success mb-2">With baggage</p>
-                                            {% else %}
-                                                <p class="text-muted mb-2">No baggage</p>
-                                            {% endif %}
-                                                <button class="flight-btn">
-                                                    Reserved
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
+                                <div class="col-md-3">
+                                    <h5>{{ offer.from_city }}</h5>
+                                    <p class="text-muted mb-0">Departure</p>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <p class="mb-1">{{ offer.duration }}</p>
+                                    <span>────────></span>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <h5>{{ offer.to_destination.name }}</h5>
+                                    <p class="text-muted mb-0">{{ offer.airline.name }}</p>
+                                </div>
+
+                                <div class="col-md-3 text-end">
+
+                                    <h5>${{ offer.price }}</h5>
+
+                                    {% if offer.baggage_included %}
+                                        <p class="text-success mb-2">
+                                            With baggage
+                                        </p>
+                                    {% else %}
+                                        <p class="text-muted mb-2">
+                                            No baggage
+                                        </p>
+                                    {% endif %}
+
+                                    <form method="post"
+                                          action="{% url 'reserve_flight' offer.id %}">
+                                        {% csrf_token %}
+
+                                        <input type="hidden"
+                                               name="trip_type"
+                                               value="{{ trip_type }}">
+
+                                        <input type="hidden"
+                                               name="departure_date"
+                                               value="{{ departure_date }}">
+
+                                        <input type="hidden"
+                                               name="return_date"
+                                               value="{{ return_date }}">
+
+                                        <button type="submit"
+                                                class="btn btn-dark">
+                                            Reserve
+                                        </button>
+                                    </form>
+
+                                </div>
+
                             </div>
-                        {% elif offers is not None %}
-                            <p class="mt-4 text-muted">
-                                No flights found for your search.
-                            </p>
-                        {% endif %}
+
+                        </div>
+                        {% endfor %}
+
+                    </div>
+
+                    {% elif offers is not None %}
+                    <p class="mt-4 text-muted">
+                        No flights found for your search.
+                    </p>
+                    {% endif %}
                </div>
             </div>
         </div>
