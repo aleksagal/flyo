@@ -10,15 +10,14 @@
     <link rel="stylesheet" href="{% static 'bookings/style.css' %}">
 </head>
 <body>
-
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="row login-card shadow">
         <div class="p-4 col-md-4 left-panel ">
             <img src="{% static 'bookings/images/LogoFlyo.png' %}" alt="Logo" width="60">
         </div>
 
-        <div class="col-md-8 d-flex align-items-center">
-            <div class="w-75 mx-auto">
+        <div class="col-md-8 d-flex align-items-center justify-content-center">
+            <div class="w-75 mx-auto py-4">
                 <a href="{% url 'flights' %}" class="back-btn">
                     ← Back to destinations
                 </a>
@@ -29,11 +28,8 @@
                <div>
                     <form method="post">
                         {% csrf_token %}
-
                         <input type="hidden" name="to_city" value="{{ destination }}">
-
                         <div class="row g-3 mb-4">
-
                             <div class="col-md-4">
                                 <label class="form-label">From</label>
                                 <select name="from_city" class="form-select" required>
@@ -62,15 +58,16 @@
 
                             <div class="col-md-4">
                                 <label class="form-label">Trip type</label>
-                                <select name="trip_type" class="form-select" required>
+                                <select id="tripType" name="trip_type" class="form-select" required>
                                     <option value="one_way">One way</option>
-                                    <option value="return">Return</option>
+                                    <option value="return">Both way</option>
                                 </select>
                             </div>
 
                             <div class="col-md-4">
                                 <label class="form-label">Departure date</label>
                                 <input
+                                    id="departureDate"
                                     type="date"
                                     name="departure_date"
                                     class="form-control"
@@ -81,26 +78,31 @@
                             <div class="col-md-4">
                                 <label class="form-label">Return date</label>
                                 <input
+                                    id="returnDate"
                                     type="date"
                                     name="return_date"
                                     class="form-control"
                                     value="{{ return_date }}">
                             </div>
-
                         </div>
-
                         <button type="submit" class="btn btn-dark">
                             Search
                         </button>
                     </form>
 
-                   {% if offers %}
-                    <div class="mt-4">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-warning mt-3">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% if offers %}
+                    <div class="scroll-area overflow-auto pb-4" style="height:300px;">
 
                         {% for offer in offers %}
                         <div class="card mt-3 p-3 shadow-sm">
-
-                            <div class="row align-items-center">
+                            <div class="row g-3 align-items-center">
 
                                 <div class="col-md-3">
                                     <h5>{{ offer.from_city }}</h5>
@@ -118,9 +120,7 @@
                                 </div>
 
                                 <div class="col-md-3 text-end">
-
                                     <h5>${{ offer.price }}</h5>
-
                                     {% if offer.baggage_included %}
                                         <p class="text-success mb-2">
                                             With baggage
@@ -152,16 +152,11 @@
                                             Reserve
                                         </button>
                                     </form>
-
                                 </div>
-
                             </div>
-
                         </div>
                         {% endfor %}
-
                     </div>
-
                     {% elif offers is not None %}
                     <p class="mt-4 text-muted">
                         No flights found for your search.
@@ -173,5 +168,37 @@
     </div>
 </div>
 
+<script>
+    const tripType = document.getElementById("tripType");
+    const departureDate = document.getElementById("departureDate");
+    const returnDate = document.getElementById("returnDate");
+
+    function updateReturnDate() {
+        if (tripType.value === "one_way") {
+            returnDate.value = "";
+            returnDate.disabled = true;
+            returnDate.required = false;
+        } else {
+            returnDate.disabled = false;
+            returnDate.required = true;
+        }
+    }
+
+    departureDate.addEventListener("change", function () {
+        returnDate.min = departureDate.value;
+    });
+
+    returnDate.addEventListener("change", function () {
+        if (returnDate.value === departureDate.value) {
+            alert("Return date cannot be the same as departure date.");
+            returnDate.value = "";
+        }
+    });
+
+    tripType.addEventListener("change", updateReturnDate);
+
+    updateReturnDate();
+</script>
 </body>
 </html>
+

@@ -11,40 +11,31 @@
 </head>
 <body>
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
-
     <div class="row login-card shadow">
-        <div class="p-4 col-md-4 left-panel ">
+        <div class="p-4 col-md-4 left-panel">
             <img src="{% static 'bookings/images/LogoFlyo.png' %}" alt="Logo" width="60">
         </div>
 
-        <div class="col-md-8 d-flex align-items-start">
-            <div class="w-75 mx-auto">
-                <div class="row mt-4 d-flex align-items-start">
-                    <div class="col-md-6">
-<!--                        <h3>Select destinatation</h3>-->
-<!--                        <p class="fs-5">-->
-<!--                             Here are the best flight deals.-->
-<!--                        </p>-->
-                    </div>
-                    <div class="col-md-6 d-flex gap-3">
-                        <a href="{% url 'reservations' %}" class="btn btn-success ">
-                         Your reservations
-                        </a>
-                        <a href="{% url 'reservations' %}" class="btn btn-danger">
-                         Log out
-                        </a>
-                    </div>
+        <div class="col-md-8 d-flex align-items-center justify-content-center">
+            <div class="w-75 mx-auto py-4">
+                <div class="d-flex justify-content-end gap-3 mb-4">
+                    <a href="{% url 'reservations' %}" class="btn btn-success">
+                        Your reservations
+                    </a>
+                    <a href="{% url 'logout' %}" class="btn btn-danger">
+                        Log out
+                    </a>
                 </div>
                 <h3 class="mt-4">Select the best flight deals</h3>
-<!--                        <p class="fs-5">-->
-<!--                             Here are the best flight deals.-->
-<!--                        </p>-->
-                <div>
+                <p class="fs-5">
+                     Book your flight and choose the best option for your trip.
+                </p>
+                <div class="scroll-area overflow-auto" style="max-height:500px;">
                 {% for destination in destinations %}
-                    <div class="card mt-4 shadow-sm">
+                    <div class="card shadow-sm mb-3 w-80 mx-auto">
                         <div class="row align-items-center">
                             <div class="col-md-3">
-                                <img src="{% static 'bookings/images/' %}{{ destination.image_path }}"
+                                <img src="{{ destination.image.url }}"
                                      class="img-fluid rounded">
                             </div>
 
@@ -62,7 +53,7 @@
                         </div>
                     </div>
                 {% endfor %}
-                    </div>
+                </div>
             </div>
         </div>
     </div>

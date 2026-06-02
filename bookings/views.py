@@ -3,6 +3,8 @@ from .models import Destination, Airline, FlightOffer, Reservation
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from datetime import datetime
 
 def login_view(request):
     error = None
@@ -103,12 +105,20 @@ def reserve_flight(request, flight_id):
 
     flight = get_object_or_404(FlightOffer, id=flight_id)
 
-    trip_type = request.POST.get("trip_type", "one_way")
+    trip_type = request.POST.get("trip_type")
     departure_date = request.POST.get("departure_date")
     return_date = request.POST.get("return_date") or None
 
-    if not departure_date:
-        return redirect("flights")
+    if trip_type == "one_way":
+        return_date = None
+
+    if trip_type == "return" and not return_date:
+        messages.error(request, "Return date is required for return trip.")
+        return redirect("booking", destination=flight.to_destination.name)
+
+    if return_date and return_date == departure_date:
+        messages.error(request, "Return date cannot be the same as departure date.")
+        return redirect("booking", destination=flight.to_destination.name)
 
     already_reserved = Reservation.objects.filter(
         user=request.user,
@@ -119,18 +129,24 @@ def reserve_flight(request, flight_id):
         return_date=return_date,
     ).exists()
 
-    if not already_reserved:
-        Reservation.objects.create(
-            user=request.user,
-            destination=flight.to_destination.name,
-            departure_city=flight.from_city,
-            airline=flight.airline.name,
-            price=flight.price,
-            baggage=flight.baggage_included,
-            trip_type=trip_type,
-            departure_date=departure_date,
-            return_date=return_date,
+    if already_reserved:
+        messages.error(
+            request,
+            "You already have a reservation for this date. Please choose another date or another flight."
         )
+        return redirect("booking", destination=flight.to_destination.name)
+
+    Reservation.objects.create(
+        user=request.user,
+        destination=flight.to_destination.name,
+        departure_city=flight.from_city,
+        airline=flight.airline.name,
+        price=flight.price,
+        baggage=flight.baggage_included,
+        trip_type=trip_type,
+        departure_date=departure_date,
+        return_date=return_date,
+    )
 
     return redirect("reservations")
 
@@ -143,3 +159,13 @@ def reservations(request):
         "reservations": reservations
     })
 
+@login_required
+def cancel_reservation(request, reservation_id):
+    reservation = get_object_or_404(
+        Reservation,
+        id=reservation_id,
+        user=request.user
+    )
+
+    reservation.delete()
+    return redirect("reservations")

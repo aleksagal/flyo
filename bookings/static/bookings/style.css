@@ -1,12 +1,11 @@
 body {
     background: #3D3D3D;
     min-height: 100vh;
-
 }
 
 .login-card {
-    min-width: 1060px;
-    min-height: 720px;
+    width: 1060px;
+    height: 720px;
     border-radius: 14px;
     overflow: hidden;
     background: #f4f4fb;

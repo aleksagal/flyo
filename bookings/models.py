@@ -5,7 +5,7 @@ class Destination(models.Model):
     name = models.CharField(max_length=100)
     country = models.CharField(max_length=100, blank=True)
     starting_price = models.DecimalField(max_digits=8, decimal_places=2)
-    image_path = models.CharField(max_length=255)
+    image = models.ImageField(upload_to="destinations/", null=True, blank=True)
 
     def __str__(self):
         return self.name
