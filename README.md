@@ -2,7 +2,7 @@
 
 Flyo to aplikacja webowa napisana w Pythonie z wykorzystaniem frameworka Django. Projekt umożliwia użytkownikom przeglądanie dostępnych kierunków lotów, filtrowanie ofert, rezerwowanie biletów oraz zarządzanie własnymi rezerwacjami. Design został oparty na mockupie w figmie.
 
-![Uploading image.png…]()
+<img width="1006" height="265" alt="image" src="https://github.com/user-attachments/assets/c1dc0225-583c-4042-84a2-5070bc5fa85f" />
 
 ## Technologie
 
