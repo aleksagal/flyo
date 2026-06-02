@@ -44,7 +44,7 @@ Pola:
 - `name` nazwa destynacji,
 - `country` kraj,
 - `starting_price` cena początkowa,
-- `image` lub `image_path` obrazek destynacji.
+- `image` upload obrazek destynacji
 
 ### Airline
 
