@@ -41,10 +41,10 @@ Model przechowuje informacje o dostępnych kierunkach lotów.
 
 Pola:
 
-- `name` — nazwa destynacji,
-- `country` — kraj,
-- `starting_price` — cena początkowa,
-- `image` lub `image_path` — obrazek destynacji.
+- `name` nazwa destynacji,
+- `country` kraj,
+- `starting_price` cena początkowa,
+- `image` lub `image_path` obrazek destynacji.
 
 ### Airline
 
@@ -52,7 +52,7 @@ Model przechowuje dostępne linie lotnicze.
 
 Pola:
 
-- `name` — nazwa linii lotniczej.
+- `name` nazwa linii lotniczej.
 
 ### FlightOffer
 
@@ -60,12 +60,12 @@ Model reprezentuje konkretną ofertę lotu.
 
 Pola:
 
-- `from_city` — miasto wylotu,
-- `to_destination` — destynacja,
-- `airline` — linia lotnicza,
-- `price` — cena lotu,
-- `duration` — czas trwania lotu,
-- `baggage_included` — informacja, czy bagaż jest w cenie.
+- `from_city` miasto wylotu,
+- `to_destination` destynacja,
+- `airline` linia lotnicza,
+- `price`cena lotu,
+- `duration` czas trwania lotu,
+- `baggage_included` informacja, czy bagaż jest w cenie.
 
 ### Reservation
 
@@ -73,16 +73,16 @@ Model przechowuje rezerwacje użytkowników.
 
 Pola:
 
-- `user` — użytkownik, który wykonał rezerwację,
-- `destination` — miejsce docelowe,
-- `departure_city` — miasto wylotu,
-- `airline` — linia lotnicza,
-- `price` — cena,
-- `baggage` — informacja o bagażu,
-- `trip_type` — typ podróży,
-- `departure_date` — data wylotu,
-- `return_date` — data powrotu,
-- `created_at` — data utworzenia rezerwacji.
+- `user` użytkownik, który wykonał rezerwację,
+- `destination` miejsce docelowe,
+- `departure_city` miasto wylotu,
+- `airline` linia lotnicza,
+- `price`cena,
+- `baggage` informacja o bagażu,
+- `trip_type` typ podróży,
+- `departure_date` data wylotu,
+- `return_date` data powrotu,
+- `created_at` data utworzenia rezerwacji.
 
 ## Widoki aplikacji
 
