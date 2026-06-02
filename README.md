@@ -1,9 +1,8 @@
-# Flyo (aplikacja do rezerwacji lotów) <img width="58" height="24" alt="LogoFlyo" src="https://github.com/user-attachments/assets/41b7e18c-fb50-4637-8470-8fd45808fb85" />
+# <img width="58" height="24" alt="Logo" src="https://github.com/user-attachments/assets/dd28dfce-560b-4088-9414-f04fcaabeaff" /> (aplikacja do rezerwacji lotów) 
 
+Flyo to aplikacja webowa napisana w Pythonie z wykorzystaniem frameworka Django. Projekt umożliwia użytkownikom przeglądanie dostępnych kierunków lotów, filtrowanie ofert, rezerwowanie biletów oraz zarządzanie własnymi rezerwacjami. Na poczatku stworzylam wstepny mock-up w figmie.
 
-Flyo to aplikacja webowa napisana w Pythonie z wykorzystaniem frameworka Django. Projekt umożliwia użytkownikom przeglądanie dostępnych kierunków lotów, filtrowanie ofert, rezerwowanie biletów oraz zarządzanie własnymi rezerwacjami.
-
-https://github.com/user-attachments/assets/aaf29c03-c525-4fca-a881-ce0945d9714f
+<img width="1173" height="331" alt="image" src="https://github.com/user-attachments/assets/b4f37905-16d3-439c-8699-695a3e5aa864" />
 
 ## Technologie
 
@@ -13,6 +12,8 @@ https://github.com/user-attachments/assets/aaf29c03-c525-4fca-a881-ce0945d9714f
 - Bootstrap 5
 - CSS
 - JavaScript
+- 
+https://github.com/user-attachments/assets/aaf29c03-c525-4fca-a881-ce0945d9714f
 
 ## Główne funkcjonalności
 
