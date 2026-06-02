@@ -12,7 +12,7 @@ Flyo to aplikacja webowa napisana w Pythonie z wykorzystaniem frameworka Django.
 - Bootstrap 5
 - CSS
 - JavaScript
-- 
+  
 https://github.com/user-attachments/assets/aaf29c03-c525-4fca-a881-ce0945d9714f
 
 ## Główne funkcjonalności
