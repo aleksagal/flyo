@@ -1,4 +1,5 @@
-# Flyo — aplikacja do rezerwacji lotów
+# Flyo (aplikacja do rezerwacji lotów) <img width="58" height="24" alt="LogoFlyo" src="https://github.com/user-attachments/assets/41b7e18c-fb50-4637-8470-8fd45808fb85" />
+
 
 Flyo to aplikacja webowa napisana w Pythonie z wykorzystaniem frameworka Django. Projekt umożliwia użytkownikom przeglądanie dostępnych kierunków lotów, filtrowanie ofert, rezerwowanie biletów oraz zarządzanie własnymi rezerwacjami.
 
